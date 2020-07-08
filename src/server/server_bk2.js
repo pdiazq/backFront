@@ -135,7 +135,7 @@ const renderApp = async (req, res) => {
     }
   }
  
-  //console.log (`Mi Lista..... :::: ${JSON.stringify(initialState.myList)}`)
+  console.log (`Mi Lista..... :::: ${JSON.stringify(initialState.myList)}`)
 
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
@@ -205,24 +205,21 @@ app.post("/auth/sign-up", async function (req, res, next) {
 
 // Agregar películas favoritas
 
-app.put("/user/:userMovieId", async function(req, res, next) {
+app.post("/user-movies", async function(req, res, next) {
   try {
-    const { userMovieId } = req.params;
     const { body: userMovie } = req;
 
-    console.log(`EN SERVER EL DATA RECIBIDO ES: 
-    usuario: ${JSON.stringify(userMovieId)}
-    pelicula: ${JSON.stringify(userMovie)}`)
+    console.log(`EN SERVER EL DATA RECIBIDO ES: ${JSON.stringify(userMovie)}`)
     const { token } = req.cookies;
 
     const { data, status } = await axios({
-      url: `${process.env.API_URL}/api/user/${userMovieId}`,
+      url: `${process.env.API_URL}/api/user-movies`,
       headers: { Authorization: `Bearer ${token}` },
-      method: "put",
+      method: "post",
       data: userMovie
     });
-    console.log(`status ${status}`)
-    if (status !== 200) {
+
+    if (status !== 201) {
       return next(boom.badImplementation());
     }
 
@@ -232,30 +229,24 @@ app.put("/user/:userMovieId", async function(req, res, next) {
   }
 });
 
-// Borrar películas favoritas
 
-app.delete("/user/:userMovieId", async function(req, res, next) {
+app.delete("/user-movies/:userMovieId", async function(req, res, next) {
   try {
+    console.log ( `HACIENDO SOLICITUD DE BORRADO DESDE SERVER!!`)
     const { userMovieId } = req.params;
-    const { body: userMovie } = req;
-
-    console.log(`EN SERVER PEDIDO DE BORRADO A: 
-    usuario: ${JSON.stringify(userMovieId)}
-    pelicula: ${JSON.stringify(userMovie)}`)
     const { token } = req.cookies;
 
     const { data, status } = await axios({
-      url: `${process.env.API_URL}/api/user/${userMovieId}`,
+      url: `${process.env.API_URL}/api/user-movies/${userMovieId}`,
       headers: { Authorization: `Bearer ${token}` },
-      method: "delete",
-      data: userMovie
+      method: "delete"
     });
-    console.log(`status ${status}`)
+
     if (status !== 200) {
       return next(boom.badImplementation());
     }
 
-    res.status(201).json(data);
+    res.status(200).json(data);
   } catch (error) {
     next(error);
   }

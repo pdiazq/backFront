@@ -6,23 +6,15 @@ import '../assets/styles/components/Player.scss';
 import NotFount from "./NotFount";
 
 const Player = (props) => {
-  console.log (`1 EN PLAYER.................${JSON.stringify(props)}`)
-  var playing = props.playing
-  if (playing) {
-    console.log (`2 EN PLAYER.................${playing.source}`)
-    var playingSource = playing.source || '1.mp4'
-
-  }
   const { id } = props.match.params;
-  const hasPlaying = true
-  //const hasPlaying = Object.keys(props.playing).length > 0;
+  const hasPlaying = Object.keys(props.playing).length > 0;
   useEffect(() => {
     props.getVideoSource(id);
   }, []);
   return !hasPlaying ? <NotFount /> : (
     <div className="Player">
       <video controls autoPlay>
-        <source src={playingSource} type="video/mp4" />
+        <source src={props.playing.source} type="video/mp4" />
         Your browser does not support HTML5 video.
       </video>
       <div className="Player-back">
@@ -32,7 +24,6 @@ const Player = (props) => {
       </div>
     </div>
   );
-
 }
 
 Player.propTypes = {

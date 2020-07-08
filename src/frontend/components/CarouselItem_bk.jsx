@@ -8,9 +8,6 @@ import playIcon from '../assets/static/play-icon.png';
 import plusIcon from '../assets/static/plus-icon.png'
 import removeIcon from '../assets/static/remove-icon.png'
 import { favoriteMovie } from "../actions";
-import { deleteFavoriteMovie } from "../actions";
-
-
 
 if (typeof document !== 'undefined') {
   try {
@@ -27,10 +24,9 @@ console.log(`CARGANDO CAROUSEL ITEM  ${uId}`)
 
 
 const CarouselItem = (props) => {
-  console.log( `CAROUSEL ITEM PROPS ${JSON.stringify(props)}`)
   //console.log (`USER ID = ${uId} MOVIE ID = ${id}`);
-  const { id, _id, cover, title, year, contentRating, duration, isList, slug, source } = props;
-  console.log(`Carousel Item.............:id  ${id}  _id  ${_id}`)
+  //console.log(`LAS PROPS SON..............:   ${JSON.stringify(props)}`)
+  const { _id, cover, title, year, contentRating, duration, isList, slug, source } = props;
   const handleSetFavorite = () => {
     props.setFavorite({
       _id, cover, title, year, contentRating,
@@ -40,18 +36,15 @@ const CarouselItem = (props) => {
     console.log (`ejecutando Set Favorite de Carousel Item!!!!!!!!!!!!${uId} ${_id}`);
   }
   const handleDeleteFavorite = (itemId) => {
-    console.log (`ejecutando delete Favorite de Carousel Item!!!!!!!!!!!! usuario ${uId} Peli ${_id}, item id ${itemId}`);
+    DeletefavoriteMovie(uId, _id)
     props.deteleFavorite(itemId);
-    deleteFavoriteMovie(uId, _id)
   }
   return (
-    <a href={`/detail/${id}`}>
-    
     <div className="carousel-item">
-    <img className="carousel-item__img" src={cover} alt={title} />
+      <img className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
         <div>
-          <Link to={`/player/${id}`}>
+          <Link to={`/player/${_id}`}>
             <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" />
           </Link>
           {!isList ? (
@@ -67,7 +60,7 @@ const CarouselItem = (props) => {
                 className="carousel-item__details--img"
                 src={removeIcon}
                 alt="Quitar de mi lista"
-                onClick={() => handleDeleteFavorite(id)}
+                onClick={() => handleDeleteFavorite(_id)}
               />
             )
           }
@@ -76,9 +69,6 @@ const CarouselItem = (props) => {
         <p className="carousel-item__details--subtitle">{`${year} ${contentRating} ${duration}`}</p>
       </div>
     </div>
-
-    </a>
-
   );
 }
 

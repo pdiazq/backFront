@@ -74,12 +74,13 @@ export const favoriteMovie = (userId, movieId, cb) => {
 
         console.log (`ACTIONS FAVORITE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
         let data = {
-          "movies": movieId
+          userId,
+          movieId
         };
 
         axios({
-          url: `/user/${userId}`,
-          method: 'put',
+          url: '/user-movies',
+          method: 'post',
           data
         })
       .then((data) => {
@@ -90,20 +91,17 @@ export const favoriteMovie = (userId, movieId, cb) => {
 };
 
 
-export const deleteFavoriteMovie = (userId, movieId, cb) => {
 
-  console.log (`ACTIONS DELETE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
-  let data = {
-    "movies": movieId
-  };
+export const deleteFavoriteMovie = (userMovieId, cb) => {
+
+  console.log (`ACTIONS DELETE FAVORITE MOVIE !!!!!!!!!!!! userMovie: ${userMovieId}`);
 
   axios({
-    url: `/user/${userId}`,
+    url: `/user/${userMovieId}`,
     method: 'delete',
-    data
   })
 .then((data) => {
-  console.log (`EL DATA SE ENVIO DESDE .THEN DE ACTIONS PARA LA ACCION DE BORRAR PELI ${JSON.stringify(data)}`)
+  console.log (`EL DATA SE ENVIO BORRÓ .THEN DE ACTIONS PARA BORRADO DE ADICIONAR PELI ${JSON.stringify(data)}`)
 
 })
 .catch(err => console.log(`ESTO ES UN PUTO ERROR!!   ${err}`));

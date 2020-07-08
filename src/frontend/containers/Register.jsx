@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { registerRequest } from "../actions";
+import { registerUser } from "../actions";
 import Header from '../components/Header';
 import '../assets/styles/components/Register.scss';
 
@@ -12,6 +12,7 @@ const Register = props => {
     id: '',
     name: '',
     password: '',
+    movies: [809809809, 8098098]
   });
 
   const updateInput = event => {
@@ -23,8 +24,7 @@ const Register = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.registerRequest(form);
-    props.history.push('/register');
+    props.registerUser(form, '/login');
   }
   return (
     <>
@@ -54,7 +54,7 @@ const Register = props => {
               placeholder="Contraseña"
               onChange={updateInput}
             />
-            <button className="button" type="button">Registrarme</button>
+            <button className="button" type="submit">Registrarme</button>
           </form>
           <Link to="/login" className="register__container--login">
             Iniciar sesión
@@ -66,11 +66,11 @@ const Register = props => {
 }
 
 const mapDispatchToProps = {
-  registerRequest,
+  registerUser,
 };
 
 Register.propTypes = {
-  registerRequest: PropTypes.func,
+  registerUser: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(Register);

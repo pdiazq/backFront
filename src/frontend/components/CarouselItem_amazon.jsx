@@ -27,7 +27,6 @@ console.log(`CARGANDO CAROUSEL ITEM  ${uId}`)
 
 
 const CarouselItem = (props) => {
-  console.log( `CAROUSEL ITEM PROPS ${JSON.stringify(props)}`)
   //console.log (`USER ID = ${uId} MOVIE ID = ${id}`);
   const { id, _id, cover, title, year, contentRating, duration, isList, slug, source } = props;
   console.log(`Carousel Item.............:id  ${id}  _id  ${_id}`)
@@ -45,15 +44,13 @@ const CarouselItem = (props) => {
     deleteFavoriteMovie(uId, _id)
   }
   return (
-    <a href={`/detail/${id}`}>
-    
     <div className="carousel-item">
-    <img className="carousel-item__img" src={cover} alt={title} />
+      <img className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
         <div>
-          <Link to={`/player/${id}`}>
+          <a href="https://s3-sa-east-1.amazonaws.com/www.eorganics.io/small.mp4">
             <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" />
-          </Link>
+          </a>
           {!isList ? (
             <img
               className="carousel-item__details--img"
@@ -76,9 +73,6 @@ const CarouselItem = (props) => {
         <p className="carousel-item__details--subtitle">{`${year} ${contentRating} ${duration}`}</p>
       </div>
     </div>
-
-    </a>
-
   );
 }
 

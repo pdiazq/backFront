@@ -96,7 +96,7 @@ const renderApp = async (req, res) => {
     });
 
     let userMovies = await axios({
-      url: `${process.env.API_URL}/api/user/${id}`,
+      url: `${process.env.API_URL}/api/user-movies/`,
       headers: { Authorization: `Bearer ${token}`},
       method: 'get',
     });
@@ -104,11 +104,11 @@ const renderApp = async (req, res) => {
   
   
   
-  userMovies = (userMovies.data.data).movies;
-  //userMovies = userMovies.filter(movie => movie.userId === `${id}` && movie._id);
-  //let userMovie_id = userMovies.map(({ _id }) => _id)
-  //let userMovieId = userMovies.map(({ movieId }) => movieId) // A QUITAR
-  console.log(`las peliculas de usuario y su ID es: ${JSON.stringify(userMovies)}`)
+  userMovies = userMovies.data.data;
+  userMovies = userMovies.filter(movie => movie.userId === `${id}` && movie._id);
+  let userMovie_id = userMovies.map(({ _id }) => _id)
+  let userMovieId = userMovies.map(({ movieId }) => movieId) // A QUITAR
+  console.log(`las peliculas de usuario y su ID es: ${JSON.stringify(userMovie_id)}`)
   movieList = movieList.data.data;
 
   // ESTE ES: let userP = userMovies.map(({ movieId }) => movieList.filter(movie => movie._id === `${movieId}` && movie._id))
@@ -121,8 +121,10 @@ const renderApp = async (req, res) => {
   //console.log(`DESDE SERVER, MIS MOVIES::::::::::::::::::::${JSON.stringify(userFinal)}`)
 
     initialState = {
-      user: {id, email, name},
-      myList: movieList.filter((movie) => userMovies.includes(movie._id)), 
+      user: {
+        id, email, name, userMovie_id
+      },
+      myList: movieList.filter((movie) => userMovieId.includes(movie._id)), 
       trends: movieList.filter(movie => movie.contentRating === 'PG' && movie._id),
       originals: movieList.filter(movie => movie.contentRating === 'G'&& movie._id)
     };
@@ -134,8 +136,6 @@ const renderApp = async (req, res) => {
       originals: []
     }
   }
- 
-  //console.log (`Mi Lista..... :::: ${JSON.stringify(initialState.myList)}`)
 
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
@@ -205,24 +205,20 @@ app.post("/auth/sign-up", async function (req, res, next) {
 
 // Agregar películas favoritas
 
-app.put("/user/:userMovieId", async function(req, res, next) {
+app.post("/user-movies", async function(req, res, next) {
   try {
-    const { userMovieId } = req.params;
     const { body: userMovie } = req;
-
-    console.log(`EN SERVER EL DATA RECIBIDO ES: 
-    usuario: ${JSON.stringify(userMovieId)}
-    pelicula: ${JSON.stringify(userMovie)}`)
+    console.log(`EN SERVER EL DATA RECIBIDO ES: ${JSON.stringify(userMovie)}`)
     const { token } = req.cookies;
 
     const { data, status } = await axios({
-      url: `${process.env.API_URL}/api/user/${userMovieId}`,
+      url: `${process.env.API_URL}/api/user-movies`,
       headers: { Authorization: `Bearer ${token}` },
-      method: "put",
+      method: "post",
       data: userMovie
     });
-    console.log(`status ${status}`)
-    if (status !== 200) {
+
+    if (status !== 201) {
       return next(boom.badImplementation());
     }
 
@@ -232,30 +228,24 @@ app.put("/user/:userMovieId", async function(req, res, next) {
   }
 });
 
-// Borrar películas favoritas
 
-app.delete("/user/:userMovieId", async function(req, res, next) {
+app.delete("/user-movies/:userMovieId", async function(req, res, next) {
   try {
+    console.log ( `HACIENDO SOLICITUD DE BORRADO DESDE SERVER!!`)
     const { userMovieId } = req.params;
-    const { body: userMovie } = req;
-
-    console.log(`EN SERVER PEDIDO DE BORRADO A: 
-    usuario: ${JSON.stringify(userMovieId)}
-    pelicula: ${JSON.stringify(userMovie)}`)
     const { token } = req.cookies;
 
     const { data, status } = await axios({
-      url: `${process.env.API_URL}/api/user/${userMovieId}`,
+      url: `${process.env.API_URL}/api/user-movies/${userMovieId}`,
       headers: { Authorization: `Bearer ${token}` },
-      method: "delete",
-      data: userMovie
+      method: "delete"
     });
-    console.log(`status ${status}`)
+
     if (status !== 200) {
       return next(boom.badImplementation());
     }
 
-    res.status(201).json(data);
+    res.status(200).json(data);
   } catch (error) {
     next(error);
   }

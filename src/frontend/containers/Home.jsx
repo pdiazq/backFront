@@ -7,6 +7,7 @@ import Categories from '../components/Categories';
 import Search from '../components/Search';
 import '../assets/styles/Home.scss';
 
+
 const Home = ({ myList, trends, originals }) => (
   <>
     <Header />

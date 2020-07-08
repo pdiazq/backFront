@@ -18,13 +18,12 @@ const reducer = (state, action) => {
         user: action.payload
       }
     case 'GET_VIDEO_SOURCE':
-      console.log(`1 EN REDUCER EL ESTADO DEL VIDEO SOURCE ..${JSON.stringify(state)}`)
-      console.log(`2 EN REDUCER EL ACTION PAYLOAD DEL VIDEO SOURCE ..${action.payload}`)
+      console.log(`EL ESTADO DEL VIDEO SOURCE EN REDUCER..${JSON.stringify(state)}`)
+      console.log(`EL ACTION PAYLOAD DEL VIDEO SOURCE EN REDUCER..${JSON.stringify(action.payload)}`)
       return {
         ...state,
-        playing: state.trends.find(item => item.id === action.payload) ||
-          state.originals.find(item => item.id === action.payload) ||
-          state.myList.find(item => item.id === action.payload) || {}
+        playing: state.trends.find(item => item.id === Number(action.payload)) ||
+          state.originals.find(item => item.id === Number(action.payload)) || {}
       }
     default:
       return state;
