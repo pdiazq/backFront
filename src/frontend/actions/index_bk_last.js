@@ -1,13 +1,7 @@
 import axios from 'axios';
-const regeneratorRuntime = require('regenerator-runtime');
 
 export const setFavorite = payload => ({
   type: 'SET_FAVORITE',
-  payload,
-});
-
-export const detailProd = payload => ({
-  type: 'DETAIL',
   payload,
 });
 
@@ -33,7 +27,7 @@ export const deteleFavorite = payload => ({
 
 
 export const searchList = payload => ({
-  type: 'SEARCH',
+  type: 'SEARCH_LIST',
   payload,
 });
   
@@ -123,33 +117,24 @@ export const deleteFavoriteMovie = (userId, movieId, cb) => {
 
 // Traer data basado en filtro
 
-export const getDataFilter = (dataGet) => {
-  return new Promise((resolve, reject) => {
-    let data = {
-      "title": dataGet
-    };
-    console.log(`Trayendo datos = ${JSON.stringify(data)}`)
 
-    axios({
-      url: '/movies/filter',
-      method: 'post',
-      data
-    })
-    .then(({data}) => {
-    const payload = data.data
-    //console.log (`EL DATA SE ENVIO DESDE .THEN getDataFilter ${JSON.stringify(payload)}`)
-    //métdo resolve si todo sale bien, retorna (payload)
-    resolve (payload)
-    })
-    //await (filtrado)
-    .catch(err => {
-      console.log(`ESTO ES UN PUTO ERROR PARCE!!   ${err}`)
-      reject(err)
-    });
-  });
-}
+export const getDataFilter = (dataGet, cb) => {
+  let data = {
+    "title": dataGet
+  };
+  console.log(`Trayendo datos = ${JSON.stringify(data)}`)
 
+  axios({
+    url: '/movies/filter',
+    method: 'post',
+    data
+  })
+.then((data) => {
+  console.log (`EL DATA SE ENVIO DESDE .THEN getDataFilter ${JSON.stringify(data.data.data)}`)
 
+})
+.catch(err => console.log(`ESTO ES UN PUTO ERROR PARCE!!   ${err}`));
+};
 
 
 export { setFavorite as default }

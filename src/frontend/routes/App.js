@@ -7,6 +7,7 @@ import Login from '../containers/Login';
 import Register from '../containers/Register';
 import NotFount from '../containers/NotFount';
 import Detail from '../containers/Detail';
+import List from '../containers/List'
 
 const App = ({ isLogged }) => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const App = ({ isLogged }) => (
       <Switch>
         <Route exact path="/" component={isLogged ? Home : Login} />
         <Route exact path="/player/:id" component={isLogged ? Player : Login} />
+        <Route exact path="/list/:name" render={(props ) => <List isHome {...props} />} />
         <Route exact path="/detail/:id" component={isLogged ? Detail : Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />

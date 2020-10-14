@@ -16,18 +16,22 @@ const Search = (props) => {
   });
 
   let history = useHistory();
+  
+  console.log(JSON.stringify(props.params)||`OKKK`)
 
-  if (props.match) {
+  if(props.params) {
     const { match: { params } } = props;
-    console.log(`INPUT VALUE EN SEARCH..${JSON.stringify(props)}`)
-    const inputVal = params.name.toString()
+    console.log(`INPUT VALUE EN SEARCH..${params.inputVal}`)
+    const inputVal = params.inputVal
     getDataFilter(inputVal)
     .then(data => { 
       console.log(JSON.stringify(data)) 
       props.searchList(data);
+      //<Route exact path="/list/:inputVal" component={isLogged ? List : Login} />
+      history.push(`/list/${inputVal}`)
     })
 
-  } 
+  }
   
 
   function keyPressed(event) {

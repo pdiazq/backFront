@@ -4,22 +4,26 @@ import '../assets/styles/components/Carousel.scss';
 
 const Carousel = ({title, children }) => {
   const [toShow, setShow]= useState([])
-  const [count, setCount] = useState(1)
   
 
   
 
   useEffect(() =>{
-    if (title === 'Mi lista') {
-      const childrenA = children.slice(0, count);
+    if (title === "Mi lista") {
+      const childrenA = children.slice(0, 3);
       setShow(childrenA)
-      console.log(`Counter ${toShow}`)
     }
-  }, [count])
+  }, [])
 
 
-
-
+  function rigth(){
+    const l= Object.keys(toShow).length 
+    console.log(`TOSHOW ${(l)}`)
+  }
+  
+  function left(){
+    console.log(`PERROS`)
+  }
 
 
   
@@ -30,16 +34,16 @@ const Carousel = ({title, children }) => {
       <div className="carousel__container">
         <div className="Categories">
           <h3 className="categories__title">{title}</h3>
-          {title === 'Mi lista' ? toShow: children}
+          {toShow}
         </div>
       </div>
     </div>
     <section>
-      <button onClick={() => setCount(count-1)}>Izquierda</button>
+      <button onClick={left}>Izquierda</button>
 
     </section>
     <section>
-      <button onClick={() => setCount(count+1)}>Derecha</button>
+      <button onClick={rigth}>Derecha</button>
 
     </section>
   </>

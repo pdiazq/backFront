@@ -7,27 +7,16 @@ import { searchList, getDataFilter} from "../actions";
 import '../assets/styles/components/Search.scss';
 
 
-
 const Search = (props) => {
-
+  const { match: { params } } = props;
+  
   const { isHome } = props
   const inputStyle = classNames('input', {
     isHome,
   });
 
   let history = useHistory();
-
-  if (props.match) {
-    const { match: { params } } = props;
-    console.log(`INPUT VALUE EN SEARCH..${JSON.stringify(props)}`)
-    const inputVal = params.name.toString()
-    getDataFilter(inputVal)
-    .then(data => { 
-      console.log(JSON.stringify(data)) 
-      props.searchList(data);
-    })
-
-  } 
+  console.log(`INPUT VALUE EN SEARCH..${params.inputVal}`)
   
 
   function keyPressed(event) {

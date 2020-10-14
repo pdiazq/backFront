@@ -68,7 +68,7 @@ const setResponse = (html, preloadedState, manifest) => {
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <meta charset="utf-8" />
           <link rel="stylesheet" href="${mainStyles}" type="text/css"/>
-          <title>Platfix</title>
+          <title>e-organic</title>
         </head>
         <body>
           <div id="app">${html}</div>
@@ -122,6 +122,7 @@ const renderApp = async (req, res) => {
 
     initialState = {
       user: {id, email, name},
+      mySearch:[],
       myList: movieList.filter((movie) => userMovies.includes(movie._id)), 
       trends: movieList.filter(movie => movie.contentRating === 'PG' && movie._id),
       originals: movieList.filter(movie => movie.contentRating === 'G'&& movie._id)
@@ -129,6 +130,7 @@ const renderApp = async (req, res) => {
   } catch (err) {
     initialState = {
       user: {},
+      mySearch:[],
       myList: [],
       trends: [],
       originals: []
@@ -232,7 +234,34 @@ app.put("/user/:userMovieId", async function(req, res, next) {
   }
 });
 
-// Borrar películas favoritas
+// Traer películas filtradas
+
+app.post("/movies/filter", async function(req, res, next) {
+  try {
+    const {body: title } = req;
+    const {token} = req.cookies;
+    //var CircularJSON = require('circular-json');
+    //console.log(`EL REQ EN SERVER ES: ${CircularJSON.stringify(title)}`);
+    //console.log (`titulo es ${JSON.stringify(req)}`)
+
+    const { data, status } = await axios({
+      url: `${process.env.API_URL}/api/movies/filter`,
+      headers: { Authorization: `Bearer ${token}` },
+      method: "post",
+      data: title
+    });
+    console.log(`status ${status}`)
+    if (status !== 200) {
+      return next(boom.badImplementation());
+    }
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+// Borrado de Película de favoritas
 
 app.delete("/user/:userMovieId", async function(req, res, next) {
   try {
@@ -254,13 +283,11 @@ app.delete("/user/:userMovieId", async function(req, res, next) {
     if (status !== 200) {
       return next(boom.badImplementation());
     }
-
-    res.status(201).json(data);
+    res.status(200).json(data);
   } catch (error) {
     next(error);
   }
 });
-
 
 
 app.get('*', renderApp);

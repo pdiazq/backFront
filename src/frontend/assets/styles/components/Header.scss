@@ -63,3 +63,32 @@
   border-radius: 100%;
   object-fit: cover;
 }
+
+
+
+
+#navbar #nav-shop .nav-a:hover {
+  color: #ff9900;
+  text-decoration: underline;
+}
+#navbar #nav-search .nav-search-facade,
+#navbar #nav-tools .nav-icon,
+#navbar #nav-shop .nav-icon,
+#navbar #nav-subnav .nav-hasArrow .nav-arrow {
+  display: none;
+}
+#navbar #nav-search .nav-search-submit,
+#navbar #nav-search .nav-search-scope {
+  display: block;
+}
+#nav-search .nav-search-scope {
+  padding: 0 5px;
+}
+#navbar #nav-search .nav-search-dropdown {
+  position: relative;
+  top: 5px;
+  height: 23px;
+  font-size: 14px;
+  opacity: 1;
+  filter: alpha(opacity = 100);
+}

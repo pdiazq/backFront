@@ -19,7 +19,10 @@ const Carousel = ({title, children }) => {
 
 
 
-
+  
+  function left(){
+    console.log(`PERROS`)
+  }
 
 
   
@@ -35,11 +38,11 @@ const Carousel = ({title, children }) => {
       </div>
     </div>
     <section>
-      <button onClick={() => setCount(count-1)}>Izquierda</button>
+      <button onClick={left}>Izquierda</button>
 
     </section>
     <section>
-      <button onClick={() => setCount(count+1)}>Derecha</button>
+      <button onClick={() => setCount(count + 1)}>Derecha</button>
 
     </section>
   </>
