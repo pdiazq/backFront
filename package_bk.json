@@ -4,6 +4,7 @@
   "description": "React Base",
   "main": "index.js",
   "scripts": {
+    "build": "webpack-cli --config webpack.config.js --colors",
     "lint": "eslint src/frontend --fix",
     "start": "node src/server/index",
     "test": "jest",
