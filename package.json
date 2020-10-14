@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack-cli --config webpack.config.js --colors",
     "lint": "eslint src/frontend --fix",
-    "start": "nodemon src/server/index",
+    "start": "node src/server/index",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -48,7 +48,6 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "mini-css-extract-plugin": "^0.7.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-middleware": "^3.7.2",
