@@ -1,5 +1,6 @@
 .carousel {
   overflow: scroll;
+  display:inline-block;
   padding-left: 30px;
   width: 100%;
   position: relative;
@@ -24,4 +25,32 @@
   position: absolute;
   padding-left: 30px;
   width: 100%;
+}
+
+.Left_button {
+  background: white;
+  color: black;
+  display: flex;
+  font-size: 16px;
+  top: 150px;
+  position: absolute;
+  left: 20px;
+  width: 60px;
+  height: 100px;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.Rigth_button {
+  background: white;
+  color: black;
+  font-size: 16px;
+  display: flex;
+  top: 150px;
+  position: absolute;
+  left: 93%;
+  width: 60px;
+  height: 100px;
+  opacity: 0.5;
+  z-index: 2;
 }
