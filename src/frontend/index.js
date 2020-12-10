@@ -14,7 +14,7 @@ console.log (`INDEX JS PRELOADED STATE = ${JSON.stringify(preloadedState)}`)
 const store = createStore(reducer, preloadedState, composeEnhancers(applyMiddleware(thunk)));
 const history = createBrowserHistory();
 
-console.log(`INDEX .JS store: ${ JSON.stringify({preloadedState })}`)
+console.log(`INDEX .JS Preloaded store: ${ JSON.stringify({preloadedState })}`)
 console.log(`INDEX .JS store: ${ JSON.stringify({store})}`)
 
 

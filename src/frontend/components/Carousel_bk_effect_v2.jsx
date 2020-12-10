@@ -19,12 +19,11 @@ const Carousel = ({title, children }) => {
     const childrenA = children.slice(0+count, 6+count);
     if (count < 0) {
       setSlide(0)
-    }
-    if (count >= children.length) {
-      setSlide(children.length-1)
+      // const childrenL = children.slice(0, 6);
+      // setShow(childrenL)
+      // console.log('COUNT________', count)
     }
     setShow(childrenA)
-    
   // la variable luego de la ',' [count], sirve para limitar el la ejecución de useEffect solo cuando dicha variable cambia 
   }, [count])
 

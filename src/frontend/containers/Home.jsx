@@ -8,39 +8,45 @@ import Search from '../components/Search';
 import '../assets/styles/Home.scss';
 
 
-const Home = ({ myList, trends, originals }) => (
-  <>
-    <Header />
-    <Search isHome />
-    {myList.length > 0 && (
-      <Categories title="Mi lista">
-        <Carousel>
-          {myList.map(item => (
-            <CarouselItem
-              key={item.id}
-              {...item}
-              isList
-            />
+const Home = ({ myList, trends, originals }) => {
+
+ 
+
+  return ( 
+    <>
+      <Header />
+      <Search isHome />
+      {myList.length > 0 && (
+
+          <Carousel title="Mi lista">
+            {myList.map(item => (
+              <CarouselItem
+                key={item.id}
+                {...item}
+                isList
+              />
+            ))}
+          </Carousel>
+
+      )}
+
+        <Carousel title="Tendencias">
+          {trends.map(item => (
+            <CarouselItem key={item.id} {...item} />
           ))}
         </Carousel>
-      </Categories>
-    )}
-    <Categories title="Tendencias">
-      <Carousel>
-        {trends.map(item => (
-          <CarouselItem key={item.id} {...item} />
-        ))}
-      </Carousel>
-    </Categories>
-    <Categories title="Originales de Platfix">
-      <Carousel>
-        {originals.map(item =>
-          <CarouselItem key={item.id} {...item} />
-        )}
-      </Carousel>
-    </Categories>
-  </>
-);
+
+        <Carousel title="Originales de Platfix">
+          {originals.map(item =>
+            <CarouselItem key={item.id} {...item} />
+          )}
+        </Carousel>
+
+    </>
+  );
+
+}
+
 
 const mapStateToProps = state => {
   return {
