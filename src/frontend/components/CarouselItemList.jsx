@@ -7,9 +7,8 @@ import '../assets/styles/components/CarouselItem.scss';
 import playIcon from '../assets/static/play-icon.png';
 import plusIcon from '../assets/static/plus-icon.png'
 import removeIcon from '../assets/static/remove-icon.png'
-import { favoriteMovie, deleteFavoriteMovie, detailProd } from "../actions";
-
-
+import { favoriteMovie } from "../actions";
+import { deleteFavoriteMovie } from "../actions";
 
 
 
@@ -27,9 +26,7 @@ console.log(`CARGANDO CAROUSEL ITEM  ${uId}`)
 
 
 
-const CarouselItem = (props) => {
-  //CarouselItem es llamado desde Home. Se hace un map para iterar por cada item
-  //Finalmente como props a CarouselItem se pasa cada componente o película descompuestos
+const CarouselItemList = (props) => {
   console.log( `CAROUSEL ITEM PROPS ${JSON.stringify(props)}`)
   //console.log (`USER ID = ${uId} MOVIE ID = ${id}`);
   const { id, _id, cover, title, year, contentRating, duration, isList, slug, source } = props;
@@ -47,20 +44,11 @@ const CarouselItem = (props) => {
     props.deteleFavorite(itemId);
     deleteFavoriteMovie(uId, _id)
   }
-
-  const detailProd = () =>{
-    props.detailProd(props);
-  }
-
+  //<a href={`/detail/${id}`}>
   return (
 
-<<<<<<< HEAD
-    <Link to={`/product/${id}`} onClick={detailProd}>
-=======
-    <Link to={`/detail/${id}`} onClick={detailProd}>
->>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
     <div className="carousel-item">
-    <img key={_id} className="carousel-item__img" src={cover} alt={title} />
+    <img className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
         <div>
           <Link to={`/player/${id}`}>
@@ -88,11 +76,10 @@ const CarouselItem = (props) => {
         <p className="carousel-item__details--subtitle">{`${year} ${contentRating} ${duration}`}</p>
       </div>
     </div>
-    </Link>
   );
 }
 
-CarouselItem.propTypes = {
+CarouselItemList.propTypes = {
   title: PropTypes.string,
   year: PropTypes.number,
   contentRating: PropTypes.string,
@@ -105,8 +92,7 @@ CarouselItem.propTypes = {
 const mapDispatchToProps = {
   setFavorite,
   deteleFavorite,
-  detailProd
 };
 
-export default connect(null, mapDispatchToProps)(CarouselItem);
+export default connect(null, mapDispatchToProps)(CarouselItemList);
 

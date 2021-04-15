@@ -1,42 +1,14 @@
 const reducer = (state, action) => {
   switch (action.type) {
-
-    case 'SEARCH':
-      console.log(`REDUCERS ACTION.PAYLOAD  ${JSON.stringify(action.payload)}`)
-      return {
-        ...state,
-        mySearch: action.payload
-      }
-<<<<<<< HEAD
-    
-    case 'DETAIL':
-      console.log(`REDUCERS ACTION. product ${JSON.stringify(action.payload)}`)
-      return {
-        ...state,
-        product: action.payload
-      }
-
-=======
-
-    case 'DETAIL':
-      console.log(`REDUCERS ACTION. detail ${JSON.stringify(action.payload)}`)
-      return {
-        ...state,
-        detail: action.payload
-      }
-
-
->>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
     case 'SET_FAVORITE':
       return {
         ...state,
         myList: [...state.myList, action.payload]
       }
     case 'DELETE_FAVORITE':
-      //console.log(`REDUCERS ACTION.PAYLOAD  ${action.payload}`)
       return {
         ...state,
-        myList: state.myList.filter(items => items._id !== action.payload)
+        myList: state.myList.filter(items => items.id !== action.payload)
       }
     case 'LOGIN_REQUEST':
     case 'REGISTER_REQUEST':

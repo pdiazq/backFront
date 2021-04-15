@@ -16,7 +16,11 @@ const App = ({ isLogged }) => (
         <Route exact path="/" component={isLogged ? Home : Login} />
         <Route exact path="/player/:id" component={isLogged ? Player : Login} />
         <Route exact path="/list/:name" render={(props ) => <List isHome {...props} />} />
+<<<<<<< HEAD
         <Route exact path="/product/:id" component={isLogged ? Detail : Login} />
+=======
+        <Route exact path="/detail/:id" component={isLogged ? Detail : Login} />
+>>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route component={NotFount} />

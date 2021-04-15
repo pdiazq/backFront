@@ -1,13 +1,7 @@
 import axios from 'axios';
-const regeneratorRuntime = require('regenerator-runtime');
 
 export const setFavorite = payload => ({
   type: 'SET_FAVORITE',
-  payload,
-});
-
-export const detailProd = payload => ({
-  type: 'DETAIL',
   payload,
 });
 
@@ -33,7 +27,7 @@ export const deteleFavorite = payload => ({
 
 
 export const searchList = payload => ({
-  type: 'SEARCH',
+  type: 'SEARCH_LIST',
   payload,
 });
   
@@ -84,10 +78,12 @@ export const loginUser = ({ email, password }, redirectUrl) => {
 
 
 export const favoriteMovie = (userId, movieId, cb) => {
-        //console.log (`ACTIONS FAVORITE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
+
+        console.log (`ACTIONS FAVORITE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
         let data = {
           "movies": movieId
         };
+
         axios({
           url: `/user/${userId}`,
           method: 'put',
@@ -121,75 +117,24 @@ export const deleteFavoriteMovie = (userId, movieId, cb) => {
 
 // Traer data basado en filtro
 
-export const getDataFilter = (dataGet) => {
-  return new Promise((resolve, reject) => {
-    let data = {
-      "title": dataGet
-    };
-    console.log(`Trayendo datos = ${JSON.stringify(data)}`)
 
-    axios({
-      url: '/movies/filter',
-      method: 'post',
-      data
-    })
-    .then(({data}) => {
-    const payload = data.data
-    //console.log (`EL DATA SE ENVIO DESDE .THEN getDataFilter ${JSON.stringify(payload)}`)
-    //métdo resolve si todo sale bien, retorna (payload)
-    resolve (payload)
-    })
-    //await (filtrado)
-    .catch(err => {
-      console.log(`ESTO ES UN PUTO ERROR PARCE!!   ${err}`)
-      reject(err)
-    });
-  });
-}
-<<<<<<< HEAD
-
-=======
->>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
-
-// enviar comentarios/preguntas
-
-export const sendComment = (userId,comment ,movieId, cb) => {
-  //console.log (`ACTIONS FAVORITE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
+export const getDataFilter = (dataGet, cb) => {
   let data = {
-    "comments": comment
+    "title": dataGet
   };
+  console.log(`Trayendo datos = ${JSON.stringify(data)}`)
+
   axios({
-    url: `/movies/${movieId}`,
-    method: 'put',
+    url: '/movies/filter',
+    method: 'post',
     data
   })
 .then((data) => {
-  console.log (`EL DATA SE ENVIO DESDE .THEN DE ACTIONS PARA LA ACCION DE ADICIONAR PELI ${JSON.stringify(data)}`)
+  console.log (`EL DATA SE ENVIO DESDE .THEN getDataFilter ${JSON.stringify(data.data.data)}`)
+
 })
-.catch(err => console.log(`ESTO ES UN PUTO ERROR!!   ${err}`));
+.catch(err => console.log(`ESTO ES UN PUTO ERROR PARCE!!   ${err}`));
 };
 
-
-// Traer comentarios de cierta peli
-
-export const getComments = (movieId) => {
-  return new Promise((resolve, reject) => {
-    axios({
-      url: `/movies/${movieId}`,
-      method: 'get'
-    })
-    .then((data) => {
-      //const payload = data.data
-      //console.log (`EL DATA SE ENVIO DESDE .THEN getDataFilter ${JSON.stringify(payload)}`)
-      //métdo resolve si todo sale bien, retorna (payload)
-      resolve (data)
-    })
-      //await (filtrado)
-    .catch(err => {
-      console.log(`ESTO ES UN PUTO ERROR PARCE!!   ${err}`)
-      reject(err)
-    });
-  });
-}
 
 export { setFavorite as default }

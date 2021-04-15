@@ -23,6 +23,8 @@ const Login = props => {
   };
 
   const handleSubmit = event => {
+    //envío de la forma de login
+    console.log('forma_', form)
     event.preventDefault();
     props.loginUser(form, '/');
   }
