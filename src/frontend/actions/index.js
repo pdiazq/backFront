@@ -36,7 +36,6 @@ export const searchList = payload => ({
   type: 'SEARCH',
   payload,
 });
-  
 
 export const getVideoSource = payload => ({
   type: 'GET_VIDEO_SOURCE',
@@ -84,12 +83,10 @@ export const loginUser = ({ email, password }, redirectUrl) => {
 
 
 export const favoriteMovie = (userId, movieId, cb) => {
-
-        console.log (`ACTIONS FAVORITE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
+        //console.log (`ACTIONS FAVORITE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
         let data = {
           "movies": movieId
         };
-
         axios({
           url: `/user/${userId}`,
           method: 'put',
@@ -150,6 +147,45 @@ export const getDataFilter = (dataGet) => {
 }
 
 
+// enviar comentarios/preguntas
 
+export const sendComment = (userId,comment ,movieId, cb) => {
+  //console.log (`ACTIONS FAVORITE MOVIE !!!!!!!!!!!! user: ${userId}, Movie: ${movieId}`);
+  let data = {
+    "comments": comment
+  };
+  axios({
+    url: `/movies/${movieId}`,
+    method: 'put',
+    data
+  })
+.then((data) => {
+  console.log (`EL DATA SE ENVIO DESDE .THEN DE ACTIONS PARA LA ACCION DE ADICIONAR PELI ${JSON.stringify(data)}`)
+})
+.catch(err => console.log(`ESTO ES UN PUTO ERROR!!   ${err}`));
+};
+
+
+// Traer comentarios de cierta peli
+
+export const getComments = (movieId) => {
+  return new Promise((resolve, reject) => {
+    axios({
+      url: `/movies/${movieId}`,
+      method: 'get'
+    })
+    .then((data) => {
+      //const payload = data.data
+      //console.log (`EL DATA SE ENVIO DESDE .THEN getDataFilter ${JSON.stringify(payload)}`)
+      //métdo resolve si todo sale bien, retorna (payload)
+      resolve (data)
+    })
+      //await (filtrado)
+    .catch(err => {
+      console.log(`ESTO ES UN PUTO ERROR PARCE!!   ${err}`)
+      reject(err)
+    });
+  });
+}
 
 export { setFavorite as default }

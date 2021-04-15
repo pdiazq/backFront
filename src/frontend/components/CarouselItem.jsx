@@ -28,6 +28,8 @@ console.log(`CARGANDO CAROUSEL ITEM  ${uId}`)
 
 
 const CarouselItem = (props) => {
+  //CarouselItem es llamado desde Home. Se hace un map para iterar por cada item
+  //Finalmente como props a CarouselItem se pasa cada componente o película descompuestos
   console.log( `CAROUSEL ITEM PROPS ${JSON.stringify(props)}`)
   //console.log (`USER ID = ${uId} MOVIE ID = ${id}`);
   const { id, _id, cover, title, year, contentRating, duration, isList, slug, source } = props;
@@ -52,9 +54,9 @@ const CarouselItem = (props) => {
 
   return (
 
-    <Link to={`/detail/${id}`} onClick={detailProd}>
+    <Link to={`/product/${id}`} onClick={detailProd}>
     <div className="carousel-item">
-    <img className="carousel-item__img" src={cover} alt={title} />
+    <img key={_id} className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
         <div>
           <Link to={`/player/${id}`}>

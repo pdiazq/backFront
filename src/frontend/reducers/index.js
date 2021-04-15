@@ -7,14 +7,13 @@ const reducer = (state, action) => {
         ...state,
         mySearch: action.payload
       }
-
+    
     case 'DETAIL':
-      console.log(`REDUCERS ACTION. detail ${JSON.stringify(action.payload)}`)
+      console.log(`REDUCERS ACTION. product ${JSON.stringify(action.payload)}`)
       return {
         ...state,
-        detail: action.payload
+        product: action.payload
       }
-
 
     case 'SET_FAVORITE':
       return {

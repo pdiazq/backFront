@@ -260,6 +260,53 @@ app.post("/movies/filter", async function(req, res, next) {
   }
 });
 
+// Agregar comentarios a las películas
+
+app.put("/movies/:movieId", async function(req, res, next) {
+  try {
+    const { movieId } = req.params;
+    const { body: comment } = req;
+    const { token } = req.cookies;
+
+    const { data, status } = await axios({
+      url: `${process.env.API_URL}/api/movies/${movieId}`,
+      headers: { Authorization: `Bearer ${token}` },
+      method: "put",
+      data: comment
+    });
+    console.log(`status ${status}`)
+    if (status !== 200) {
+      return next(boom.badImplementation());
+    }
+
+    res.status(201).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Traer comentarios
+
+app.get("/movies/:movieId", async function(req, res, next) {
+  try {
+    const { movieId } = req.params;
+    const {token} = req.cookies;
+    const { data, status } = await axios({
+      url: `${process.env.API_URL}/api/movies/${movieId}`,
+      headers: { Authorization: `Bearer ${token}` },
+      method: "get"
+    });
+    console.log(`status ${status}`)
+    if (status !== 200) {
+      return next(boom.badImplementation());
+    }
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 // Borrado de Película de favoritas
 
