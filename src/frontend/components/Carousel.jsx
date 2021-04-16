@@ -16,10 +16,7 @@ const Carousel = ({title, children }) => {
   // las funciones setter de useState hace re dendering del componente
 
   useEffect(() =>{
-<<<<<<< HEAD
     // Children es un array enviado desde el container Home quien llama a Carousel
-=======
->>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
     const childrenA = children.slice(0+count, 6+count);
     if (count < 0) {
       setSlide(0)

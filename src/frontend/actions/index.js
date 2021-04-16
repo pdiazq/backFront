@@ -36,7 +36,6 @@ export const searchList = payload => ({
   type: 'SEARCH',
   payload,
 });
-  
 
 export const getVideoSource = payload => ({
   type: 'GET_VIDEO_SOURCE',
@@ -146,10 +145,7 @@ export const getDataFilter = (dataGet) => {
     });
   });
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
 
 // enviar comentarios/preguntas
 

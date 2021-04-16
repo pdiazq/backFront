@@ -54,11 +54,7 @@ const CarouselItem = (props) => {
 
   return (
 
-<<<<<<< HEAD
     <Link to={`/product/${id}`} onClick={detailProd}>
-=======
-    <Link to={`/detail/${id}`} onClick={detailProd}>
->>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
     <div className="carousel-item">
     <img key={_id} className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
@@ -109,4 +105,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(CarouselItem);
-

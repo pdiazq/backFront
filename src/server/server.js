@@ -260,7 +260,6 @@ app.post("/movies/filter", async function(req, res, next) {
   }
 });
 
-<<<<<<< HEAD
 // Agregar comentarios a las películas
 
 app.put("/movies/:movieId", async function(req, res, next) {
@@ -308,8 +307,6 @@ app.get("/movies/:movieId", async function(req, res, next) {
 });
 
 
-=======
->>>>>>> b2678cf0259f72468b27d5ff9d2020a794050e23
 
 // Borrado de Película de favoritas
 
