@@ -2,7 +2,9 @@
   "name": "react-base",
   "version": "1.0.0",
   "engines": {
-    "node": "8.x"
+    "node": "8.x",
+
+    "npm": "7.x"
   },
   "description": "React Base",
   "main": "index.js",
