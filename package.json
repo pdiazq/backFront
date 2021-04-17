@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "engines": {
     "node": "8.x",
-    "npm": "7.x",
-    "yarn": "0.28.4"
+    "npm": "7.x"
   },
   "description": "React Base",
   "main": "index.js",
